@@ -7,14 +7,13 @@ import com.clearminds.ccc.servicios.ServicioEstudiante;
 public class TestServicio {
 
 	public static void main(String[] args) {
-
+	
 		ServicioEstudiante srvEstudiante = new ServicioEstudiante();
-
+		
 		try {
-			srvEstudiante.insertarEstudiante(new Estudiante("Cristian", "Choto"));
+			srvEstudiante.insertarEstudiante(new Estudiante("Cristian","Choto"));
 		} catch (BDDException e) {
 			e.printStackTrace();
-			e.getMessage();
 		}
 
 	}
