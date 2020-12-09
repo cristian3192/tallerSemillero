@@ -1,9 +1,12 @@
 package com.clearminds.ccc.bdd;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
 import com.clearminds.ccc.excepciones.BDDException;
@@ -12,12 +15,14 @@ public class ConexionBDD {
 
 	public static String leerPropiedad(String propiedad) {
 
+		File f=new File("conexion.properties");
+		System.out.println("ruta:"+f.getAbsoluteFile());
 		Properties p = new Properties();
 		try {
 			p.load(new FileReader("conexion.properties"));
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			
 			return null;
 		} catch (IOException e) {
 			e.printStackTrace();
