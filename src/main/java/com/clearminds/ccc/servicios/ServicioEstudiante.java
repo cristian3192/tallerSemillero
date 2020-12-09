@@ -7,18 +7,17 @@ import com.clearminds.ccc.excepciones.BDDException;
 
 public class ServicioEstudiante extends ServicioBase {
 
-
 	public void insertarEstudiante(Estudiante estudiante) throws BDDException {
 		abrirConexion();
 		System.out.println("Insertando Estudiante: " + estudiante);
-		Statement stm = null;
+		Statement stmt = null;
 		try {
-			stm = getConexion().createStatement();
+			stmt = getConexion().createStatement();
 
 			String sql = "insert into estudiantes(nombre,apellido) values('" + estudiante.getNombre() + "','"
 					+ estudiante.getApellido() + "')";
-			System.out.println("Script: "+sql);
-			stm.executeUpdate(sql);
+			System.out.println("Script: " + sql);
+			stmt.executeUpdate(sql);
 			cerrarConexion();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -27,4 +26,23 @@ public class ServicioEstudiante extends ServicioBase {
 
 	}
 
+	public void actualizarEstudiante(Estudiante estudiante) throws BDDException {
+		abrirConexion();
+		System.out.println("Actualizando Estudiante: " + estudiante);
+		Statement stmt = null;
+
+		try {
+			stmt = getConexion().createStatement();
+			String sql = "update estudiantes set nombre='" + estudiante.getNombre() + "', apellido='"
+					+ estudiante.getApellido() + "' where id=" + estudiante.getId();
+
+			System.out.println("Script: " + sql);
+
+			stmt.executeUpdate(sql);
+			cerrarConexion();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new BDDException("Error al actualizar estudiante");
+		}
+	}
 }
